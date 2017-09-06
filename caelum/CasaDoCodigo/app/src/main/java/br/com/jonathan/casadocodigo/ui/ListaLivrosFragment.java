@@ -18,8 +18,13 @@ import br.com.jonathan.casadocodigo.R;
 import br.com.jonathan.casadocodigo.adapter.LivroAdapter;
 import br.com.jonathan.casadocodigo.model.Autor;
 import br.com.jonathan.casadocodigo.model.Livro;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ListaLivrosFragment extends Fragment {
+
+    @BindView(R.id.lista_livros)
+    RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +39,8 @@ public class ListaLivrosFragment extends Fragment {
             livros.add(livro);
         }
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.lista_livros);
+        ButterKnife.bind(this, view);
+
         recyclerView.setAdapter(new LivroAdapter(livros));
         recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
 

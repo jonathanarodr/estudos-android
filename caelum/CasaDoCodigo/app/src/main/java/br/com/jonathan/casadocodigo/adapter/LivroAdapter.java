@@ -11,6 +11,8 @@ import java.util.List;
 
 import br.com.jonathan.casadocodigo.R;
 import br.com.jonathan.casadocodigo.model.Livro;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class LivroAdapter extends RecyclerView.Adapter {
 
@@ -21,15 +23,17 @@ public class LivroAdapter extends RecyclerView.Adapter {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.item_livro_nome)
         TextView nome;
+        @BindView(R.id.item_livro_foto)
         ImageView foto;
 
         public ViewHolder(View view) {
             super(view);
-
-            nome = (TextView) view.findViewById(R.id.item_livro_nome);
-            foto = (ImageView) view.findViewById(R.id.item_livro_foto);
+            ButterKnife.bind(this, itemView);
         }
+
     }
 
     @Override
