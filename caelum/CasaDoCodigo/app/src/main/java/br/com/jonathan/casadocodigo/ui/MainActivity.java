@@ -8,10 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.List;
 
 import br.com.jonathan.casadocodigo.R;
 import br.com.jonathan.casadocodigo.delegate.LivroDelegate;
+import br.com.jonathan.casadocodigo.event.LivroEvent;
 import br.com.jonathan.casadocodigo.model.Livro;
 import br.com.jonathan.casadocodigo.services.WebClient;
 
@@ -29,7 +33,14 @@ public class MainActivity extends AppCompatActivity implements LivroDelegate, Fr
         transaction.replace(R.id.frame_principal, this.livrosFragment);
         transaction.commit();
 
-        new WebClient(this).getLivros();
+        new WebClient().getLivros();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
     @Override
@@ -44,12 +55,12 @@ public class MainActivity extends AppCompatActivity implements LivroDelegate, Fr
         setDisplayUpToolBar();
     }
 
-    @Override
-    public void onSuccess(List<Livro> livros) {
-        livrosFragment.populaLista(livros);
+    @Subscribe
+    public void onSuccess(LivroEvent livroEvent) {
+        livrosFragment.populaLista(livroEvent.getLivros());
     }
 
-    @Override
+    @Subscribe
     public void onFailure(Throwable t) {
         Snackbar.make(findViewById(R.id.frame_principal), t.getMessage(), Snackbar.LENGTH_INDEFINITE)
                 .setAction("try", new View.OnClickListener() {

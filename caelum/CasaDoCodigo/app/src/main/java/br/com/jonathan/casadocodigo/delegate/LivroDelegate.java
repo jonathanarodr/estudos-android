@@ -8,7 +8,4 @@ public interface LivroDelegate {
 
     public void clickItem(Livro livro);
 
-    public void onSuccess(List<Livro> livros);
-
-    public void onFailure(Throwable throwable);
 }

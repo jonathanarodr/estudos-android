@@ -1,9 +1,13 @@
 package br.com.jonathan.casadocodigo.services;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import br.com.jonathan.casadocodigo.converter.LivroServiceConverterFactory;
 import br.com.jonathan.casadocodigo.delegate.LivroDelegate;
+import br.com.jonathan.casadocodigo.event.LivroEvent;
+import br.com.jonathan.casadocodigo.event.LivroEventError;
 import br.com.jonathan.casadocodigo.model.Livro;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,10 +17,9 @@ import retrofit2.Retrofit;
 public class WebClient {
 
     private static final String SERVER_URL = "http://cdcmob.herokuapp.com/";
-    private LivroDelegate delegate;
 
-    public WebClient(LivroDelegate delegate) {
-        this.delegate = delegate;
+    public WebClient() {
+
     }
 
     public void getLivros() {
@@ -31,12 +34,12 @@ public class WebClient {
         call.enqueue(new Callback<List<Livro>>() {
             @Override
             public void onResponse(Call<List<Livro>> call, Response<List<Livro>> response) {
-                delegate.onSuccess(response.body());
+                EventBus.getDefault().post(new LivroEvent(response.body()));
             }
 
             @Override
             public void onFailure(Call<List<Livro>> call, Throwable t) {
-                delegate.onFailure(t);
+                EventBus.getDefault().post(new LivroEventError(t));
             }
         });
     }
