@@ -1,5 +1,6 @@
 package br.com.jonathan.casadocodigo.adapter;
 
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,11 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.jonathan.casadocodigo.R;
+import br.com.jonathan.casadocodigo.delegate.LivroDelegate;
 import br.com.jonathan.casadocodigo.model.Livro;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class LivroAdapter extends RecyclerView.Adapter {
 
@@ -34,6 +37,13 @@ public class LivroAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, itemView);
         }
 
+        @OnClick(R.id.item_livro)
+        public void onClickItem() {
+            Livro livro = livros.get(getAdapterPosition());
+            LivroDelegate delegate = (LivroDelegate) itemView.getContext();
+            delegate.clickItem(livro);
+        }
+
     }
 
     @Override
@@ -53,6 +63,7 @@ public class LivroAdapter extends RecyclerView.Adapter {
         ViewHolder viewHolder = (ViewHolder) holder;
         Livro livro = livros.get(position);
         viewHolder.nome.setText(livro.getNome());
+        viewHolder.foto.setImageURI(Uri.parse(livro.getUrlFoto()));
     }
 
     @Override

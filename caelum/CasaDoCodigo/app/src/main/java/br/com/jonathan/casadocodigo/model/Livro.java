@@ -1,8 +1,9 @@
 package br.com.jonathan.casadocodigo.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Livro {
+public class Livro implements Serializable {
 
     private long id;
     private String nome;
@@ -16,10 +17,16 @@ public class Livro {
     private String urlFoto;
     private List<Autor> autores;
 
+    public Livro(){
+
+    }
+
     public Livro(String nome, String descricao, List<Autor> autores) {
+
         this.nome = nome;
         this.descricao = descricao;
         this.autores = autores;
+
     }
 
     public long getId() {
@@ -109,5 +116,4 @@ public class Livro {
     public void setAutores(List<Autor> autores) {
         this.autores = autores;
     }
-
 }

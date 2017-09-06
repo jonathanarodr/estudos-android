@@ -1,6 +1,8 @@
 package br.com.jonathan.casadocodigo.model;
 
-public class Autor {
+import java.io.Serializable;
+
+public class Autor implements Serializable {
 
     private long id;
     private String nome;
@@ -38,5 +40,4 @@ public class Autor {
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
     }
-
 }
