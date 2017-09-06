@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import br.com.jonathan.casadocodigo.R;
 import br.com.jonathan.casadocodigo.model.Autor;
 import br.com.jonathan.casadocodigo.model.Livro;
@@ -73,6 +75,11 @@ public class DetalhesLivroFragment extends Fragment {
         val_fisico.setText(String.format("Comprar livro - R$ %.2f", livro.getValorFisico()));
         val_ebook.setText(String.format("Comprar eBook - R$ %.2f", livro.getValorVirtual()));
         val_ambos.setText(String.format("Comprar ambos - R$ %.2f", livro.getValorDoisJuntos()));
-        foto.setImageURI(Uri.parse(livro.getUrlFoto()));
+
+        //carrega imagem com lib picasso
+        Picasso.with(getActivity())
+                .load(livro.getUrlFoto())
+                .placeholder(R.drawable.livro)
+                .into(foto);
     }
 }
