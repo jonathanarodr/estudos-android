@@ -1,5 +1,7 @@
 # estudos-android
 
+#### Testes automatizados com [Android Espresso](https://developer.android.com/training/testing/espresso/index.html)
+
 ```java
 @RunWith(AndroidJUnit.class)
 @LargeTest
