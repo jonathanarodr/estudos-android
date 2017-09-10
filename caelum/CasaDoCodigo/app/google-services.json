@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "244561633719-389mes8bkjnsi9jefelc66vsto8vuqc7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.jonathan.casadocodigo",
+            "certificate_hash": "670bb8e617cebcfe48dea04af7b8856dd8e00d4c"
+          }
+        },
+        {
           "client_id": "244561633719-j4oqlb49qr4c0u5mr65t4a7o0ebr2n9h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -30,6 +38,9 @@
       "api_key": [
         {
           "current_key": "AIzaSyDGjiEw2S0xYbP8ltRQEEQOIKOKLS7t8SM"
+        },
+        {
+          "current_key": "AIzaSyAlW2g2OFMmzhfqkWEodsFYC5NVT84T200"
         }
       ],
       "services": {
