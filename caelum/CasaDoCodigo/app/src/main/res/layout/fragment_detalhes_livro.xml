@@ -49,7 +49,6 @@
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
-
                     <TextView
                         android:id="@+id/detalhes_livro_autores"
                         android:layout_width="match_parent"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lista_itens_livros"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/carrinho_valtotal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="12dp"
+        android:textAlignment="textEnd"
+        android:text="R$ 0,00"/>
+
+</LinearLayout>

@@ -1,18 +1,26 @@
 package br.com.jonathan.casadocodigo.ui;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import br.com.jonathan.casadocodigo.CasaDoCodigoApplication;
 import br.com.jonathan.casadocodigo.R;
 import br.com.jonathan.casadocodigo.delegate.LivroDelegate;
 import br.com.jonathan.casadocodigo.event.LivroEvent;
@@ -28,14 +36,20 @@ public class MainActivity extends AppCompatActivity implements LivroDelegate, Fr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        CasaDoCodigoApplication app = ((CasaDoCodigoApplication) getApplication());
+        app.getComponent().inject(this);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         this.livrosFragment = new ListaLivrosFragment();
         transaction.replace(R.id.frame_principal, this.livrosFragment);
         transaction.commit();
 
-        new WebClient().getLivros();
+        new WebClient().getLivros(0, 10);
         EventBus.getDefault().register(this);
     }
+
+    @Inject
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onDestroy() {
@@ -53,6 +67,29 @@ public class MainActivity extends AppCompatActivity implements LivroDelegate, Fr
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         setDisplayUpToolBar();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.vai_para_carrinho) {
+            Intent intent = new Intent(this, CarrinhoActivity.class);
+            startActivity(intent);
+        }
+
+        if (item.getItemId() == R.id.vai_para_login) {
+            firebaseAuth.signOut();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        return true;
     }
 
     @Subscribe

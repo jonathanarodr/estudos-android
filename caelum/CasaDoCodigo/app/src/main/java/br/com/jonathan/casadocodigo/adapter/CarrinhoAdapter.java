@@ -12,74 +12,56 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import br.com.jonathan.casadocodigo.R;
-import br.com.jonathan.casadocodigo.delegate.LivroDelegate;
-import br.com.jonathan.casadocodigo.model.Livro;
+import br.com.jonathan.casadocodigo.model.Item;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class LivroAdapter extends RecyclerView.Adapter {
+public class CarrinhoAdapter extends RecyclerView.Adapter {
 
-    private List<Livro> livros;
+    private List<Item> itens;
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.item_livro_nome)
+        @BindView(R.id.nome_item_comprado)
         TextView nome;
-        @BindView(R.id.item_livro_foto)
+        @BindView(R.id.imagem_item_comprado)
         ImageView foto;
+        @BindView(R.id.valor_pago_item_comprado)
+        TextView valor;
 
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
-
-        @OnClick(R.id.item_livro)
-        public void onClickItem() {
-            Livro livro = livros.get(getAdapterPosition());
-            LivroDelegate delegate = (LivroDelegate) itemView.getContext();
-            delegate.clickItem(livro);
-        }
-
     }
 
-    public LivroAdapter(List<Livro> livros) {
-        this.livros = livros;
+    public CarrinhoAdapter(List<Item> itens) {
+        this.itens = itens;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        int layout = R.layout.activity_item_livro_par;
-
-        if (viewType % 2 != 0) {
-            layout = R.layout.activity_item_livro_impar;
-        }
-
+        int layout = R.layout.activity_item_carrinho;
         View view = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolder viewHolder = (ViewHolder) holder;
-        Livro livro = livros.get(position);
-        viewHolder.nome.setText(livro.getNome());
+        CarrinhoAdapter.ViewHolder viewHolder = (CarrinhoAdapter.ViewHolder) holder;
+        Item item = itens.get(position);
+        viewHolder.nome.setText(item.getLivro().getNome());
+        viewHolder.valor.setText(String.valueOf(item.getValor()));
 
         //carrega imagem com lib picasso
         Picasso.with(viewHolder.foto.getContext())
-                .load(livro.getUrlFoto())
+                .load(item.getLivro().getUrlFoto())
                 .placeholder(R.drawable.livro)
                 .into(viewHolder.foto);
     }
 
     @Override
     public int getItemCount() {
-        return this.livros.size();
+        return itens.size();
     }
-
-    @Override
-    public int getItemViewType(int position) {
-        return position % 2;
-    }
-
 }

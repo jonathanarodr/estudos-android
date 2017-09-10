@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/vai_para_carrinho"
+        android:icon="@drawable/ic_local_grocery_store_black_24dp"
+        android:title="Carrinho"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/vai_para_login"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        android:title="Sair"
+        app:showAsAction="always" />
+
+
+</menu>

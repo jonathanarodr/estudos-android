@@ -22,7 +22,7 @@ public class WebClient {
 
     }
 
-    public void getLivros() {
+    public void getLivros(int indicePrimeiroLivro, int qtdLivros) {
         Retrofit client = new Retrofit.Builder()
                 .baseUrl(SERVER_URL)
                 .addConverterFactory(new LivroServiceConverterFactory())
@@ -30,7 +30,7 @@ public class WebClient {
 
         LivroService service = client.create(LivroService.class);
 
-        Call<List<Livro>> call = service.listarLivros();
+        Call<List<Livro>> call = service.listarLivros(indicePrimeiroLivro, qtdLivros);
         call.enqueue(new Callback<List<Livro>>() {
             @Override
             public void onResponse(Call<List<Livro>> call, Response<List<Livro>> response) {

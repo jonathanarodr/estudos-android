@@ -17,8 +17,10 @@ import java.util.List;
 
 import br.com.jonathan.casadocodigo.R;
 import br.com.jonathan.casadocodigo.adapter.LivroAdapter;
+import br.com.jonathan.casadocodigo.event.EndlessListListener;
 import br.com.jonathan.casadocodigo.model.Autor;
 import br.com.jonathan.casadocodigo.model.Livro;
+import br.com.jonathan.casadocodigo.services.WebClient;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -40,9 +42,16 @@ public class ListaLivrosFragment extends Fragment {
         return view;
     }
 
-    public void populaLista(List<Livro> livros) {
+    public void populaLista(final List<Livro> livros) {
         this.livros.clear();
         this.livros.addAll(livros);
         recyclerView.getAdapter().notifyDataSetChanged();
+
+        recyclerView.addOnScrollListener(new EndlessListListener() {
+            @Override
+            public void loadItensList() {
+                new WebClient().getLivros(livros.size(), 10);
+            }
+        });
     }
 }

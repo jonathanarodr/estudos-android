@@ -1,5 +1,6 @@
 package br.com.jonathan.casadocodigo.ui;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,13 +14,23 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import javax.inject.Inject;
+
+import br.com.jonathan.casadocodigo.CasaDoCodigoApplication;
 import br.com.jonathan.casadocodigo.R;
 import br.com.jonathan.casadocodigo.model.Autor;
+import br.com.jonathan.casadocodigo.model.Carrinho;
+import br.com.jonathan.casadocodigo.model.Item;
 import br.com.jonathan.casadocodigo.model.Livro;
+import br.com.jonathan.casadocodigo.model.TipoDeCompra;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DetalhesLivroFragment extends Fragment {
+
+    @Inject
+    Carrinho carrinho;
 
     private Livro livro;
 
@@ -50,11 +61,38 @@ public class DetalhesLivroFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detalhes_livro, container, false);
         ButterKnife.bind(this, view);
 
+        CasaDoCodigoApplication app = ((CasaDoCodigoApplication) getActivity().getApplication());
+        app.getComponent().inject(this);
+
         Bundle bundle = getArguments();
         livro = (Livro) bundle.getSerializable("livro");
+
         this.setView(livro);
 
         return view;
+    }
+
+    @OnClick(R.id.detalhes_livro_comprar_fisico)
+    public void onClickCompraFisico(View view) {
+        carrinho.add(new Item(livro, TipoDeCompra.FISICO));
+        viewCarrinho();
+    }
+
+    @OnClick(R.id.detalhes_livro_comprar_ebook)
+    public void onClickCompraeBook(View view) {
+        carrinho.add(new Item(livro, TipoDeCompra.VIRTUAL));
+        viewCarrinho();
+    }
+
+    @OnClick(R.id.detalhes_livro_comprar_ambos)
+    public void onClickCompraAmbos(View view) {
+        carrinho.add(new Item(livro, TipoDeCompra.JUNTOS));
+        viewCarrinho();
+    }
+
+    private void viewCarrinho() {
+        Intent intent = new Intent(getActivity(), CarrinhoActivity.class);
+        startActivity(intent);
     }
 
     private void setView(Livro livro) {
