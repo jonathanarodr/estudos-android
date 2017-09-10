@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -59,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="#EEEEEE"
-            android:text="Novo Usuario"
+            android:text="Novo Usuário"
             android:textColor="#616161" />
 
         <TextView

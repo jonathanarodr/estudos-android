@@ -20,6 +20,7 @@ import butterknife.OnClick;
 
 public class LivroAdapter extends RecyclerView.Adapter {
 
+    private final boolean isSimpleList;
     private List<Livro> livros;
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -43,15 +44,16 @@ public class LivroAdapter extends RecyclerView.Adapter {
 
     }
 
-    public LivroAdapter(List<Livro> livros) {
+    public LivroAdapter(List<Livro> livros, boolean isSimpleList) {
         this.livros = livros;
+        this.isSimpleList = isSimpleList;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         int layout = R.layout.activity_item_livro_par;
 
-        if (viewType % 2 != 0) {
+        if ((!isSimpleList) && (viewType % 2 != 0)) {
             layout = R.layout.activity_item_livro_impar;
         }
 

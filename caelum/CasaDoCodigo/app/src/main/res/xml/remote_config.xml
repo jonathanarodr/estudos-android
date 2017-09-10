@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>list_simple</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>toolbar_color</key>
+        <value>#ff9b19</value>
+    </entry>
+    <entry>
+        <key>statusbar_color</key>
+        <value>#c66c00</value>
+    </entry>
+</defaultsMap>
