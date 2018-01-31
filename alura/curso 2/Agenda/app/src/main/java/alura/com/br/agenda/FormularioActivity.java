@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 public class FormularioActivity extends AppCompatActivity {
@@ -15,15 +13,6 @@ public class FormularioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
-
-        Button btn_salvar = (Button) findViewById(R.id.formulario_salvar);
-        btn_salvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(FormularioActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
     }
 
     @Override
@@ -36,6 +25,10 @@ public class FormularioActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_formulario_ok) {
+            Toast.makeText(FormularioActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         return super.onOptionsItemSelected(item);
     }

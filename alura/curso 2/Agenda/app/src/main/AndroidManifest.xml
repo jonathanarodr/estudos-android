@@ -20,8 +20,7 @@
         </activity>
         <activity
             android:name=".FormularioActivity"
-            android:label="Formulário">
-        </activity>
+            android:label="Formulário"></activity>
     </application>
 
 </manifest>
